@@ -10,3 +10,4 @@
 rootProject.name = 'quasar-fibers-bytecodes-graal'
 include 'testapp'
 include 'quasar-core'
+include 'uninstrumentedtestapp'

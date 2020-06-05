@@ -16,6 +16,10 @@ public class App {
 
 	@Suspendable
 	public static void printLine() {
-		System.out.println("decorated with quasar bytecodes");
+		if (Fiber.isCurrentFiber()) {
+			System.out.println("executing in fiber");
+		} else {
+			System.out.println("executing not in fiber");
+		}
 	}
 }
