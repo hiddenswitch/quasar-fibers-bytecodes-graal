@@ -1,0 +1,29 @@
+dependencies {
+    gradleApi()
+    localGroovy()
+}
+
+allprojects {
+    repositories {
+        jcenter()
+    }
+}
+
+subprojects {
+    repositories {
+        jcenter()
+        mavenCentral()
+    }
+
+    configurations.all {
+        resolutionStrategy {
+            preferProjectModules()
+            failOnVersionConflict()
+            eachDependency { DependencyResolveDetails details ->
+                if (details.requested.module.name == 'slf4j-api') {
+                    details.useVersion '1.7.29'
+                }
+            }
+        }
+    }
+}

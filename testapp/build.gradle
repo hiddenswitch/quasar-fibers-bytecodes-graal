@@ -1,0 +1,35 @@
+plugins {
+    id 'java'
+    id 'application'
+    id 'com.github.johnrengelman.shadow' version "5.2.0"
+}
+
+apply from: '../gradle/instrument.gradle'
+apply plugin: 'com.github.johnrengelman.shadow'
+
+shadowJar {
+    mergeServiceFiles()
+    zip64 true
+    manifest {
+        attributes 'Main-Class': 'quasar.fibers.bytecodes.graal.App'
+    }
+}
+
+repositories {
+    jcenter()
+}
+
+dependencies {
+    implementation 'com.google.guava:guava:26.0-jre'
+    compileOnly "org.graalvm.nativeimage:svm:20.+"
+}
+
+application {
+    // Define the main class for the application.
+    mainClassName = 'quasar.fibers.bytecodes.graal.App'
+}
+
+test {
+    // Use junit platform for unit tests
+    useJUnitPlatform()
+}
